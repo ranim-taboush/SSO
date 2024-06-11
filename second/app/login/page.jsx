@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useRouter } from "next/navigation";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { useSearchParams } from 'next/navigation'
@@ -32,16 +32,18 @@ export default function Home() {
   console.log('token :>> ', token);
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
-      {token &&
-      <iframe name="iframe1" src={`http://localhost:3000/login?token=${token}`}
-      className="hidden"></iframe>}
-      <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
-      className="border-black border-2 rounded-md p-2" />
-      <button className="bg-black rounded-md text-white text-3xl py-2 px-6"
-      onClick={handleClick}>
-        {isLoading? 'sending...': 'LOGIN'}
-      </button>
-    </main>
+    <Suspense>
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        {token &&
+        <iframe name="iframe1" src={`http://localhost:3000/login?token=${token}`}
+        className="hidden"></iframe>}
+        <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
+        className="border-black border-2 rounded-md p-2" />
+        <button className="bg-black rounded-md text-white text-3xl py-2 px-6"
+        onClick={handleClick}>
+          {isLoading? 'sending...': 'LOGIN'}
+        </button>
+      </main>
+    </Suspense>
   );
 }
