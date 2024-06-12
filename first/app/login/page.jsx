@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [name, setName] = useState('')
-  const [token, setToken] = useState(getCookie('token'))
+  const [token, setToken] = useState(getCookie('token') || searchParams.token)
   const [isLoading, setIsLoading] = useState(false)
 
 
@@ -32,9 +32,9 @@ export default function Home() {
   }
 
   return (
-    <Suspense>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        {token &&
+    <Suspense fallback={<div>Loading...</div>}>
+      <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
+        {name!=='' &&
         <iframe name="iframe1" src={`http://localhost:3001/login?token=${token}`}
         className="hidden"></iframe>}
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}

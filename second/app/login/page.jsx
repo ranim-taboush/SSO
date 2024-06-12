@@ -32,9 +32,9 @@ export default function Home() {
   console.log('token :>> ', token);
 
   return (
-    <Suspense>
-      <main className="flex min-h-screen flex-col items-center justify-between p-24">
-        {token &&
+    <Suspense fallback={<div>Loading...</div>}>
+      <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
+        {name!=='' &&
         <iframe name="iframe1" src={`http://localhost:3000/login?token=${token}`}
         className="hidden"></iframe>}
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}

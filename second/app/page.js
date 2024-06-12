@@ -9,7 +9,6 @@ export default function Home() {
 
   useEffect(()=>{
     if(!token) router.push(`/login`)
-    
   }, [])
 
   return (
