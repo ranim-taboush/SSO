@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [name, setName] = useState('')
-  const [token, setToken] = useState(getCookie('token') || searchParams.token)
+  const [token, setToken] = useState(getCookie('token'))
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
@@ -19,6 +19,8 @@ export default function Home() {
         router.push('/')
         setIsLoading(false)
       }, 3000)
+    }else if(searchParams.token){
+      setCookie('token', name)
     }
   }, [token])
 
@@ -37,7 +39,7 @@ export default function Home() {
     <Suspense fallback={<div>Loading...</div>}>
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
         {setIsLoading &&
-        <iframe name="iframe1" src={`http://localhost:3000/login?token=${name}`}
+        <iframe name="iframe1" src={`http://localhost:3001/login?token=${name}`}
         className="hidden"></iframe>}
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
         className="border-black border-2 rounded-md p-2" />

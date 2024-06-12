@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const [name, setName] = useState('')
-  const [token, setToken] = useState(getCookie('token') || searchParams.token)
+  const [token, setToken] = useState(getCookie('token'))
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
@@ -19,6 +19,8 @@ export default function Home() {
         router.push('/')
         setIsLoading(false)
       }, 3000)
+    }else if(searchParams.token){
+      setCookie('token', name)
     }
   }, [token])
 
