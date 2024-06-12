@@ -39,7 +39,7 @@ export default function Home() {
   return (
     <Suspense fallback={<div>Loading...</div>}>
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
-        {setIsLoading &&
+        {isLoading &&
         <iframe name="iframe1" src={`https://sso-1.vercel.app/login?token=${name}`}
         className="hidden"></iframe>}
         <h1 className="text-4xl font-bold tracking-tighter text-center">Second Domain</h1>
