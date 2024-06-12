@@ -20,7 +20,8 @@ export default function Home() {
         setIsLoading(false)
       }, 3000)
     }else if(searchParams.token){
-      setCookie('token', name)
+      setCookie('token', searchParams.token)
+      setToken(searchParams.token)
     }
   }, [token])
 

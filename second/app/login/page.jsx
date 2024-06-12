@@ -20,7 +20,8 @@ export default function Home() {
         setIsLoading(false)
       }, 3000)
     }else if(searchParams.token){
-      setCookie('token', name)
+      setCookie('token', searchParams.token)
+      setToken(searchParams.token)
     }
   }, [token])
 
@@ -39,7 +40,7 @@ export default function Home() {
     <Suspense fallback={<div>Loading...</div>}>
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
         {setIsLoading &&
-        <iframe name="iframe1" src={`http://localhost:3001/login?token=${name}`}
+        <iframe name="iframe1" src={`http://localhost:3000/login?token=${name}`}
         className="hidden"></iframe>}
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
         className="border-black border-2 rounded-md p-2" />
