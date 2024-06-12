@@ -41,7 +41,7 @@ export default function Home() {
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
         {setIsLoading &&
         <iframe name="iframe1" src={`https://sso-2.vercel.app/login?token=${name}`}
-        className=""></iframe>}
+        className="hidden"></iframe>}
         <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
         className="border-black border-2 rounded-md p-2" />
