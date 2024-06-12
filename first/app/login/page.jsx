@@ -34,7 +34,7 @@ export default function Home() {
       // router.push('/')
     }
   }
-  console.log('token :>> ', token);
+  // console.log('token :>> ', token);
 
   return (
     <Suspense fallback={<div>Loading...</div>}>
