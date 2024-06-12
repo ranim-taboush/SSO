@@ -7,10 +7,11 @@ import { useSearchParams } from 'next/navigation'
 function SearchParamsComponent() {
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
-  console.log('searchParams.token', token)
 
     if(token){
+      console.log('token', token)
       setCookie('token', token)
+      router.push('/')
     }
 
   return (
@@ -31,7 +32,7 @@ export default function Home() {
       window.setTimeout(()=>{
         router.push('/')
         setIsLoading(false)
-      }, 5000)
+      }, 10000)
     }
   }, [token])
 
