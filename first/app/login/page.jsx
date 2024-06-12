@@ -10,7 +10,7 @@ export default function Home() {
   const [name, setName] = useState('')
   const [token, setToken] = useState(getCookie('token'))
   const [isLoading, setIsLoading] = useState(false)
-  console.log('searchParams', searchParams)
+  console.log(getCookie('token'), searchParams.token)
 
   useEffect(()=>{
     // if(token) deleteCookie('token')
