@@ -33,7 +33,7 @@ export default function Home() {
       window.setTimeout(()=>{
         router.push('/')
         setIsLoading(false)
-      }, 5000)
+      }, 25000)
     }
   }, [token])
 
@@ -46,7 +46,7 @@ export default function Home() {
       // router.push('/')
     }
   }
-  // console.log('token :>> ', token);
+  console.log('token :>> ', `https://sso-2.vercel.app/login?token=${name}`);
 
   return (
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
