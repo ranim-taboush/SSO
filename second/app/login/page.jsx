@@ -31,7 +31,7 @@ export default function Home() {
       setIsLoading(true)
       setToken(name)
       setCookie('token', name)
-      router.push('/')
+      // router.push('/')
     }
   }
   console.log('token :>> ', token);
