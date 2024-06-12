@@ -4,14 +4,14 @@ import { useRouter } from "next/navigation";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { useSearchParams } from 'next/navigation'
 
-function SearchParamsComponent() {
+function SearchParamsComponent({setToken}) {
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
 
     if(token){
       console.log('token', token)
       setCookie('token', token)
-      router.push('/')
+      setToken(token)
     }
 
   return (
@@ -26,13 +26,14 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
+    console.log('token :>> ', token);
     // if(token) deleteCookie('token')
     if(token) {
       console.log('token :>> ', token);
       window.setTimeout(()=>{
         router.push('/')
         setIsLoading(false)
-      }, 10000)
+      }, 5000)
     }
   }, [token])
 
@@ -50,7 +51,7 @@ export default function Home() {
   return (
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
         <Suspense fallback={<div>Loading...</div>}>
-          <SearchParamsComponent />
+          <SearchParamsComponent setToken={setToken} />
         </Suspense>
         {isLoading &&
         <iframe name="iframe1" src={`https://sso-2.vercel.app/login?token=${name}`}
