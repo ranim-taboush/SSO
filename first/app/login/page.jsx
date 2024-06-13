@@ -33,7 +33,7 @@ export default function Home() {
       window.setTimeout(()=>{
         router.push('/')
         setIsLoading(false)
-      }, 25000)
+      }, 180000) 
     }
   }, [token])
 
