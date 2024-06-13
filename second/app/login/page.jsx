@@ -9,8 +9,8 @@ function SearchParamsComponent({setToken}) {
   const token = searchParams.get('token')
 
     if(token){
-      console.log('token', token)
-      setCookie('token', token)
+      console.log('token2: ', token)
+      setCookie('token2: ', token)
       setToken(token)
     }
 
@@ -26,10 +26,10 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
-    console.log('token :>> ', token);
+    console.log('token2 :>> ', token);
     // if(token) deleteCookie('token')
     if(token) {
-      console.log('token :>> ', token);
+      console.log('token2 :>> ', token);
       window.setTimeout(()=>{
         router.push('/')
         setIsLoading(false)
