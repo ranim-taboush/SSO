@@ -24,6 +24,9 @@ export default function Home() {
   const [name, setName] = useState('')
   const [token, setToken] = useState(getCookie('token'))
   const [isLoading, setIsLoading] = useState(false)
+  let devEnv = null
+  let baseUrl = devEnv? "https://sso-1.vercel.app": "https://localhost:3000"
+  let timing = 15000
 
   useEffect(()=>{
     console.log('token2 :>> ', token);
@@ -33,7 +36,7 @@ export default function Home() {
       window.setTimeout(()=>{
         router.push('/')
         setIsLoading(false)
-      }, 25000)
+      }, timing)
     }
   }, [token])
 
@@ -49,8 +52,6 @@ export default function Home() {
       // router.push('/')
     }
   }
-  // console.log('token :>> ', `https://sso-1.vercel.app/login?token=${name}`);
-  // console.log('token :>> ', `https://localhost:3000/login?token=${name}`);
 
   return (
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
@@ -58,7 +59,8 @@ export default function Home() {
           <SearchParamsComponent setToken={setToken} />
         </Suspense>
         {isLoading &&
-        <iframe name="iframe1" src={`https://sso-1.vercel.app/login?token=${name}`}
+        <iframe name="iframe1" src={`${baseUrl}/login?token=${name}`}
+        sandbox="allow-same-origin allow-scripts"
         className="hidden"></iframe>}
         <h1 className="text-4xl font-bold tracking-tighter text-center">Second Domain</h1>
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
