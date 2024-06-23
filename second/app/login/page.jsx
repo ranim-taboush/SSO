@@ -50,6 +50,7 @@ export default function Home() {
     }
   }
   // console.log('token :>> ', `https://sso-1.vercel.app/login?token=${name}`);
+  // console.log('token :>> ', `https://localhost:3000/login?token=${name}`);
 
   return (
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
@@ -57,7 +58,7 @@ export default function Home() {
           <SearchParamsComponent setToken={setToken} />
         </Suspense>
         {isLoading &&
-        <iframe name="iframe1" src={`https://localhost:3000/login?token=${name}`}
+        <iframe name="iframe1" src={`https://sso-1.vercel.app/login?token=${name}`}
         className="hidden"></iframe>}
         <h1 className="text-4xl font-bold tracking-tighter text-center">Second Domain</h1>
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
