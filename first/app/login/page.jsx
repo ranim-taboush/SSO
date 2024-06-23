@@ -9,8 +9,8 @@ function SearchParamsComponent({setToken}) {
   const token = searchParams.get('token')
 
     if(token){
-      console.log('token', token)
-      setCookie('token', token)
+      console.log('token2: ', token)
+      setCookie('token2: ', token)
       setToken(token)
     }
 
@@ -26,14 +26,14 @@ export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
-    console.log('token :>> ', token);
+    console.log('token2 :>> ', token);
     // if(token) deleteCookie('token')
     if(token) {
-      console.log('token :>> ', token);
+      console.log('token2 :>> ', token);
       window.setTimeout(()=>{
         router.push('/')
         setIsLoading(false)
-      }, 180000) 
+      }, 25000)
     }
   }, [token])
 
@@ -42,11 +42,14 @@ export default function Home() {
     else {
       setIsLoading(true)
       setToken(name)
-      setCookie('token', name)
+      setCookie('token', `${name}`, {
+        secure: true,
+        sameSite: 'None',
+      })
       // router.push('/')
     }
   }
-  console.log('token :>> ', `https://sso-2.vercel.app/login?token=${name}`);
+  // console.log('token :>> ', `https://sso-2.vercel.app/login?token=${name}`);
 
   return (
       <main className="flex min-h-screen flex-col items-center justify-center gap-10 p-24">
@@ -54,8 +57,8 @@ export default function Home() {
           <SearchParamsComponent setToken={setToken} />
         </Suspense>
         {isLoading &&
-        <iframe name="iframe1" src={`https://sso-2.vercel.app/login?token=${name}`}
-        className=""></iframe>}
+        <iframe name="iframe1" src={`https://localhost:3001/login?token=${name}`}
+        className="hidden"></iframe>}
         <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
         className="border-black border-2 rounded-md p-2" />
