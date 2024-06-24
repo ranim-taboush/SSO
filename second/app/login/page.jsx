@@ -24,15 +24,12 @@ export default function Home() {
   const [name, setName] = useState('')
   const [token, setToken] = useState(getCookie('token'))
   const [isLoading, setIsLoading] = useState(false)
-  let devEnv = null
-  let baseUrl = devEnv? "https://sso-1.vercel.app": "https://localhost:3000"
-  let timing = 15000
+  
+  let baseUrl = "https://localhost:3000"
+  let timing = 5000
 
   useEffect(()=>{
-    console.log('token2 :>> ', token);
-    // if(token) deleteCookie('token')
     if(token) {
-      console.log('token2 :>> ', token);
       window.setTimeout(()=>{
         router.push('/')
         setIsLoading(false)
