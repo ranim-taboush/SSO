@@ -61,7 +61,7 @@ export default function Home() {
         {isLoading &&
         <iframe name="iframe1" src={`${baseUrl}/login?token=${name}`}
         sandbox="allow-same-origin allow-scripts"
-        className="hidden"></iframe>}
+        className=""></iframe>}
         <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
         className="border-black border-2 rounded-md p-2" />
