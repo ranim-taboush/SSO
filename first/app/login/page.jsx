@@ -30,7 +30,10 @@ export default function Home() {
 
   useEffect(()=>{
     const iframe = document.getElementById('iframe1')
-    iframe.contentWindow.postMessage({ token: 'testing post method' }, `${baseUrl}/login`);
+    if(iframe){
+      console.log('iframe', iframe)
+      iframe?.contentWindow?.postMessage({ token: 'testing post method' }, `${baseUrl}/login`);
+    }
     if(token) {
       console.log('token', token)
       // window.setTimeout(()=>{
