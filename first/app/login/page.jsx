@@ -7,7 +7,6 @@ import { useSearchParams } from 'next/navigation'
 function SearchParamsComponent({setToken}) {
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
-  const iframe1 = useRef(null)
 
     if(token){
       console.log('token2: ', token)
@@ -22,6 +21,7 @@ function SearchParamsComponent({setToken}) {
 
 export default function Home() {
   const router = useRouter()
+  const iframe1 = useRef(null)
   const [name, setName] = useState('')
   const [token, setToken] = useState(getCookie('token'))
   const [isLoading, setIsLoading] = useState(false)
