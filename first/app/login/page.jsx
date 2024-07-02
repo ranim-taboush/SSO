@@ -25,7 +25,7 @@ export default function Home() {
   const [token, setToken] = useState(getCookie('token'))
   const [isLoading, setIsLoading] = useState(false)
   
-  let baseUrl = "https://sso-1.vercel.app/"
+  let baseUrl = "https://sso-2.vercel.app/"
   let timing = 5000
 
   useEffect(()=>{
