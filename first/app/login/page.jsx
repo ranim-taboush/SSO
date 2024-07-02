@@ -32,10 +32,11 @@ export default function Home() {
     const iframe = document.getElementById('iframe1')
     iframe.contentWindow.postMessage({ token: 'testing post method' }, `${baseUrl}/login`);
     if(token) {
-      window.setTimeout(()=>{
-        router.push('/')
-        setIsLoading(false)
-      }, timing)
+      console.log('token', token)
+      // window.setTimeout(()=>{
+      //   router.push('/')
+      //   setIsLoading(false)
+      // }, timing)
     }
   }, [token])
 
@@ -58,7 +59,7 @@ export default function Home() {
           <SearchParamsComponent setToken={setToken} />
         </Suspense>
         {isLoading &&
-        <iframe name="iframe1" src={`${baseUrl}/login?token=shazaTest`}
+        <iframe name="iframe1" src={`${baseUrl}/login?token=${name}`}
         sandbox="allow-same-origin allow-scripts"
         className="hidden"></iframe>}
         <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
