@@ -65,6 +65,8 @@ export default function Home() {
         if(iframe){
           console.log('sending...')
           iframe?.contentWindow?.postMessage({ token: name }, `${baseUrl}/login`);
+          router.push('/')
+          setIsLoading(false)
         }
       }, 1000);
     }
