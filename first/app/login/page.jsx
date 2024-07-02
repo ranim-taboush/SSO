@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, Suspense } from "react";
+import { useState, useEffect, Suspense, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { useSearchParams } from 'next/navigation'
@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation'
 function SearchParamsComponent({setToken}) {
   const searchParams = useSearchParams()
   const token = searchParams.get('token')
+  const iframe1 = useRef(null)
 
     if(token){
       console.log('token2: ', token)
@@ -38,6 +39,13 @@ export default function Home() {
     }
   }, [token])
 
+  useEffect(()=>{
+    if(iframe1.current){
+      console.log('iframe1.current', iframe1.current)
+      iframe1.current?.contentWindow?.postMessage({ token: name }, `${baseUrl}/login`);
+    }
+  }, [iframe1?.current])
+
   const handleClick = () => {
     if(name =='') alert('name is required')
     else {
@@ -61,7 +69,7 @@ export default function Home() {
           <SearchParamsComponent setToken={setToken} />
         </Suspense>
         {isLoading &&
-        <iframe name="iframe1" src={`${baseUrl}/login?token=${name}`}
+        <iframe ref={iframe1} id="iframe1" name="iframe1" src={`${baseUrl}/login?token=${name}`}
         sandbox="allow-same-origin allow-scripts"
         className=""></iframe>}
         <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
