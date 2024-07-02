@@ -25,10 +25,12 @@ export default function Home() {
   const [token, setToken] = useState(getCookie('token'))
   const [isLoading, setIsLoading] = useState(false)
   
-  let baseUrl = "https://localhost:3001"
+  let baseUrl = "https://sso-1.vercel.app/"
   let timing = 5000
 
   useEffect(()=>{
+    const iframe = document.getElementById('iframe1')
+    iframe.contentWindow.postMessage({ token: 'testing post method' }, `${baseUrl}/login`);
     if(token) {
       window.setTimeout(()=>{
         router.push('/')

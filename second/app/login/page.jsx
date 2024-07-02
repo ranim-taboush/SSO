@@ -25,7 +25,7 @@ export default function Home() {
   const [token, setToken] = useState(getCookie('token'))
   const [isLoading, setIsLoading] = useState(false)
   
-  let baseUrl = "https://localhost:3000"
+  let baseUrl = "https://sso-1.vercel.app"
   let timing = 5000
 
   useEffect(()=>{
@@ -36,6 +36,26 @@ export default function Home() {
       }, timing)
     }
   }, [token])
+
+  useEffect(()=>{
+    window.addEventListener('message', (event) => {
+      if (event.origin === baseUrl) {
+        // Handle the message received from the parent window
+        console.log('event.data', event.data)
+        const receivedToken = event.data.token;
+        console.log('Received token:', receivedToken);
+        setToken(receivedToken)
+        setCookie('token', `${name}`, {
+          secure: true,
+          sameSite: 'None',
+        })
+        setTimeout(() => {
+          router.push('/')
+        }, 15000);
+        // Use the token as needed (e.g., for authentication)
+      }
+    });
+  }, [])
 
   const handleClick = () => {
     if(name =='') alert('name is required')
