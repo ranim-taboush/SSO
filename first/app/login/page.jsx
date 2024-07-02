@@ -40,8 +40,9 @@ export default function Home() {
   }, [token])
 
   useEffect(()=>{
-    if(iframe1.current){
       console.log('iframe1.current', iframe1.current)
+    if(iframe1.current){
+      console.log('sending', sending)
       iframe1.current?.contentWindow?.postMessage({ token: name }, `${baseUrl}/login`);
     }
   }, [iframe1?.current])
@@ -55,11 +56,14 @@ export default function Home() {
         secure: true,
         sameSite: 'None',
       })
-      const iframe = document.getElementById('iframe1')
-      if(iframe){
+      setTimeout(() => {
+        const iframe = document.getElementById('iframe1')
         console.log('iframe', iframe)
-        iframe?.contentWindow?.postMessage({ token: name }, `${baseUrl}/login`);
-      }
+        if(iframe){
+          console.log('sending...')
+          iframe?.contentWindow?.postMessage({ token: name }, `${baseUrl}/login`);
+        }
+      }, 1000);
     }
   }
 
