@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect, Suspense, useRef } from "react";
 import { useRouter } from "next/navigation";
-import { setCookie, getCookie, deleteCookie } from "cookies-next";
+// import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { useSearchParams } from 'next/navigation'
 
 function SearchParamsComponent({setToken}) {
@@ -10,10 +10,11 @@ function SearchParamsComponent({setToken}) {
 
     if(token){
       console.log('token2: ', token)
-      setCookie('token ', token, {
-        secure: true,
-        sameSite: 'None',
-      })
+      sessionStorage.setItem('token', token);
+      // setCookie('token ', token, {
+      //   secure: true,
+      //   sameSite: 'None',
+      // })
       setToken(token)
     }
 
@@ -26,7 +27,7 @@ export default function Home() {
   const router = useRouter()
   const iframe1 = useRef(null)
   const [name, setName] = useState('')
-  const [token, setToken] = useState(getCookie('token'))
+  const [token, setToken] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   
   let baseUrl = "https://sso-2.vercel.app/"
@@ -40,15 +41,21 @@ export default function Home() {
     }
   }, [iframe1?.current])
 
+  useEffect(()=>{
+    console.log('sessionStorage1: ', sessionStorage.getItem('token'))
+    setToken(sessionStorage.getItem('token'))
+  }, [])
+
   const handleClick = () => {
     if(name =='') alert('name is required')
     else {
       setIsLoading(true)
       setToken(name)
-      setCookie('token', `${name}`, {
-        secure: true,
-        sameSite: 'None',
-      })
+      sessionStorage.setItem('token', name);
+      // setCookie('token', `${name}`, {
+      //   secure: true,
+      //   sameSite: 'None',
+      // })
       setTimeout(() => {
         const iframe = document.getElementById('iframe1')
         console.log('iframe', iframe)

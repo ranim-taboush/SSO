@@ -1,7 +1,7 @@
 "use client"
 import { useState, useEffect, Suspense } from "react";
 import { useRouter } from "next/navigation";
-import { setCookie, getCookie, deleteCookie } from "cookies-next";
+// import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { useSearchParams } from 'next/navigation'
 
 function SearchParamsComponent({setToken}) {
@@ -10,10 +10,11 @@ function SearchParamsComponent({setToken}) {
 
     if(token){
       console.log('token2: ', token)
-      setCookie('token', token, {
-        secure: true,
-        sameSite: 'None',
-      })
+      sessionStorage.setItem('token', token);
+      // setCookie('token', token, {
+      //   secure: true,
+      //   sameSite: 'None',
+      // })
       setToken(token)
     }
 
@@ -25,7 +26,7 @@ function SearchParamsComponent({setToken}) {
 export default function Home() {
   const router = useRouter()
   const [name, setName] = useState('')
-  const [token, setToken] = useState(getCookie('token'))
+  const [token, setToken] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   
   let baseUrl = "https://sso-1.vercel.app"
@@ -41,6 +42,8 @@ export default function Home() {
   }, [token])
 
   useEffect(()=>{
+    console.log('sessionStorage2: ', sessionStorage.getItem('token'))
+    setToken(sessionStorage.getItem('token'))
     window.addEventListener('message', (event) => {
       console.log('event.origin', event.origin)
       if (event.origin === baseUrl) {
@@ -49,10 +52,11 @@ export default function Home() {
         const receivedToken = event.data.token;
         console.log('Received token:', receivedToken);
         setToken(receivedToken)
-        setCookie('token', `${receivedToken}`, {
-          secure: true,
-          sameSite: 'None',
-        })
+        sessionStorage.setItem('token', receivedToken);
+        // setCookie('token', `${receivedToken}`, {
+        //   secure: true,
+        //   sameSite: 'None',
+        // })
         setTimeout(() => {
           router.push('/')
         }, 15000);
@@ -66,10 +70,11 @@ export default function Home() {
     else {
       setIsLoading(true)
       setToken(name)
-      setCookie('token', `${name}`, {
-        secure: true,
-        sameSite: 'None',
-      })
+      sessionStorage.setItem('token', name);
+      // setCookie('token', `${name}`, {
+      //   secure: true,
+      //   sameSite: 'None',
+      // })
       // router.push('/')
     }
   }
