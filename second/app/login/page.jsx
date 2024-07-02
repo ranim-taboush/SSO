@@ -10,7 +10,10 @@ function SearchParamsComponent({setToken}) {
 
     if(token){
       console.log('token2: ', token)
-      setCookie('token2: ', token)
+      setCookie('token2: ', token, {
+        secure: true,
+        sameSite: 'None',
+      })
       setToken(token)
     }
 
