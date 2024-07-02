@@ -39,6 +39,7 @@ export default function Home() {
 
   useEffect(()=>{
     window.addEventListener('message', (event) => {
+      console.log('event.origin', event.origin)
       if (event.origin === baseUrl) {
         // Handle the message received from the parent window
         console.log('event.data', event.data)

@@ -29,11 +29,6 @@ export default function Home() {
   let timing = 5000
 
   useEffect(()=>{
-    const iframe = document.getElementById('iframe1')
-    if(iframe){
-      console.log('iframe', iframe)
-      iframe?.contentWindow?.postMessage({ token: 'testing post method' }, `${baseUrl}/login`);
-    }
     if(token) {
       console.log('token', token)
       // window.setTimeout(()=>{
@@ -52,7 +47,11 @@ export default function Home() {
         secure: true,
         sameSite: 'None',
       })
-      // router.push('/')
+      const iframe = document.getElementById('iframe1')
+      if(iframe){
+        console.log('iframe', iframe)
+        iframe?.contentWindow?.postMessage({ token: name }, `${baseUrl}/login`);
+      }
     }
   }
 
