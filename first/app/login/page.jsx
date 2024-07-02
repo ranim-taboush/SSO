@@ -33,16 +33,6 @@ export default function Home() {
   let timing = 5000
 
   useEffect(()=>{
-    if(token) {
-      console.log('token', token)
-      window.setTimeout(()=>{
-        router.push('/')
-      //   setIsLoading(false)
-      }, timing)
-    }
-  }, [token])
-
-  useEffect(()=>{
       console.log('iframe1.current', iframe1.current)
     if(iframe1.current){
       console.log('sending', sending)
@@ -65,8 +55,11 @@ export default function Home() {
         if(iframe){
           console.log('sending...')
           iframe?.contentWindow?.postMessage({ token: name }, `${baseUrl}/login`);
-          router.push('/')
-          setIsLoading(false)
+            // console.log('name', name)
+            // window.setTimeout(()=>{
+              router.push('/')
+              setIsLoading(false)
+            // }, timing)
         }
       }, 1000);
     }
