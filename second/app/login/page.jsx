@@ -46,7 +46,7 @@ export default function Home() {
         const receivedToken = event.data.token;
         console.log('Received token:', receivedToken);
         setToken(receivedToken)
-        setCookie('token', `${name}`, {
+        setCookie('token', `${receivedToken}`, {
           secure: true,
           sameSite: 'None',
         })
