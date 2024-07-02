@@ -36,7 +36,7 @@ export default function Home() {
     if(token) {
       console.log('token', token)
       // window.setTimeout(()=>{
-      //   router.push('/')
+        router.push('/')
       //   setIsLoading(false)
       // }, timing)
     }
