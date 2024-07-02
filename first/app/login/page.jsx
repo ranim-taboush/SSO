@@ -35,10 +35,10 @@ export default function Home() {
   useEffect(()=>{
     if(token) {
       console.log('token', token)
-      // window.setTimeout(()=>{
+      window.setTimeout(()=>{
         router.push('/')
       //   setIsLoading(false)
-      // }, timing)
+      }, timing)
     }
   }, [token])
 
