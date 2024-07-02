@@ -56,12 +56,12 @@ export default function Home() {
           console.log('sending...')
           iframe?.contentWindow?.postMessage({ token: name }, `${baseUrl}/login`);
             // console.log('name', name)
-            // window.setTimeout(()=>{
+            window.setTimeout(()=>{
               router.push('/')
               setIsLoading(false)
-            // }, timing)
+            }, 2000)
         }
-      }, 1000);
+      }, timing);
     }
   }
 
