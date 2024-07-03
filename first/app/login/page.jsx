@@ -1,8 +1,9 @@
 "use client"
 import { useState, useEffect, Suspense, useRef } from "react";
 import { useRouter } from "next/navigation";
-// import { setCookie, getCookie, deleteCookie } from "cookies-next";
+import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { useSearchParams } from 'next/navigation'
+import $ from 'jquery';
 
 function SearchParamsComponent({setToken}) {
   const searchParams = useSearchParams()
@@ -29,9 +30,17 @@ export default function Home() {
   const [name, setName] = useState('')
   const [token, setToken] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
+  const [ahwSession, setAhwSession] = useState(getCookie('arabhardware_session'))
   
   let baseUrl = "https://sso-2.vercel.app/"
   let timing = 5000
+  console.log('arabhardware_session: ', 
+    getCookie('arabhardware_session', { secure: true, sameSite: 'None', domain: "arabhardware.net"}))
+
+  useEffect(()=>{
+    // document.cookie = "arabhardware_session" + ""+ "; Domain=localhost; path=/; SameSite=None; Secure";
+    setAhwSession(getCookie('arabhardware_session', { secure: true, sameSite: 'None',}))
+  }, [getCookie('arabhardware_session')])
 
   useEffect(()=>{
       console.log('iframe1.current', iframe1.current)
@@ -45,6 +54,19 @@ export default function Home() {
     console.log('sessionStorage1: ', sessionStorage.getItem('token'))
     setToken(sessionStorage.getItem('token'))
   }, [])
+
+  useEffect(()=>{
+    // trying to fetch user and token from user_profile
+    window.addEventListener('message', (event) => {
+      if (event.origin === 'https://user-profile-lyart.vercel.app') {
+        console.log(event.data)
+        // setCookie('user', event.data.user)
+        // setCookie('token', event.data.token)
+      }
+    });
+    return () => {}
+  }, [])
+  
 
   const handleClick = () => {
     if(name =='') alert('name is required')
@@ -80,7 +102,13 @@ export default function Home() {
         {isLoading &&
         <iframe ref={iframe1} id="iframe1" name="iframe1" src={`${baseUrl}/login?token=${name}`}
         sandbox="allow-same-origin allow-scripts"
-        className=""></iframe>}
+        className="hidden"></iframe>}
+        <p className="text-3xl text-red-700">
+          {ahwSession}
+        </p>
+        <iframe id="iframe4" name="iframe4" src={`https://user-profile-lyart.vercel.app/refresh`}
+        sandbox="allow-same-origin allow-scripts"
+        className=""></iframe>
         <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
         className="border-black border-2 rounded-md p-2" />

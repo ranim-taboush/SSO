@@ -14,7 +14,10 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-center gap-4 p-24 text-white bg-black">
       {token && <>
-        <h1>Welcome home {token}</h1>
+        <div className="flex items-center justify-center">
+          <h1>Welcome home</h1>
+          <p className=" break-all">{token}</p>
+        </div>
         <h2>happy to see you again</h2>
       </>}
     </main>
