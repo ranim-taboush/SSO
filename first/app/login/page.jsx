@@ -58,6 +58,7 @@ export default function Home() {
   useEffect(()=>{
     // trying to fetch user and token from user_profile
     window.addEventListener('message', (event) => {
+      console.log('event.origin', event.origin)
       if (event.origin === 'https://user-profile-lyart.vercel.app') {
         console.log(event.data)
         // setCookie('user', event.data.user)
