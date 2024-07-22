@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { setCookie, getCookie, deleteCookie } from "cookies-next";
 import { useSearchParams } from 'next/navigation'
 import $ from 'jquery';
+import axios from "axios";
 
 function SearchParamsComponent({setToken}) {
   const searchParams = useSearchParams()
@@ -34,8 +35,8 @@ export default function Home() {
   
   let baseUrl = "https://sso-2.vercel.app/"
   let timing = 5000
-  console.log('arabhardware_session: ', 
-    getCookie('arabhardware_session', { secure: true, sameSite: 'None', domain: "arabhardware.net"}))
+  console.log('getCookie', getCookie("jwt_token", { secure: true, sameSite: 'None', domain: "localhost"}))
+  console.log('getCookie1', getCookie("jwt_token", { secure: true, sameSite: 'None', domain: "arabhardware.com"}))
 
   useEffect(()=>{
     // document.cookie = "arabhardware_session" + ""+ "; Domain=localhost; path=/; SameSite=None; Secure";
@@ -50,7 +51,18 @@ export default function Home() {
     }
   }, [iframe1?.current])
 
+  const gettingData = async() => {
+    console.log('getting data...')
+    if(window){
+      setTimeout(()=>{
+          window.frames[0].document.getElementById('token')
+      }, [1000])
+    }
+    console.log('done data...')
+  }
+
   useEffect(()=>{
+    gettingData()
     console.log('sessionStorage1: ', sessionStorage.getItem('token'))
     setToken(sessionStorage.getItem('token'))
   }, [])
@@ -107,9 +119,9 @@ export default function Home() {
         <p className="text-3xl text-red-700">
           {ahwSession}
         </p>
-        <iframe id="iframe4" name="iframe4" src={`https://user-profile-lyart.vercel.app/refresh`}
+        <iframe id="iframe4" name="iframe4" src={`https://myaccount.arabhardware.com/refresh/cookie`}
         sandbox="allow-same-origin allow-scripts"
-        className=""></iframe>
+        className="hidden"></iframe>
         <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
         className="border-black border-2 rounded-md p-2" />
