@@ -133,26 +133,26 @@ export default function Home() {
         <Suspense fallback={<div>Loading...</div>}>
           <SearchParamsComponent setToken={setToken} />
         </Suspense>
-        {isLoading &&
+        {/* {isLoading &&
         <iframe ref={iframe1} id="iframe1" name="iframe1" src={`${baseUrl}/login?token=${name}`}
         sandbox="allow-same-origin allow-scripts"
         className="hidden"></iframe>}
         <p className="text-3xl text-red-700">
           {ahwSession}
-        </p>
+        </p> */}
         <iframe id="iframe4" name="iframe4" src={`https://myaccount.arabhardware.com/refresh/cookie`}
         sandbox="allow-same-origin allow-scripts"
         className=""></iframe>
         <iframe id="iframe4" name="iframe4" src={`https://myaccount.arabhardware.com/api/refresh`}
         sandbox="allow-same-origin allow-scripts"
         className=""></iframe>
-        <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
+        {/* <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
         className="border-black border-2 rounded-md p-2" />
         <button className="bg-black rounded-md text-white text-3xl py-2 px-6"
         onClick={handleClick}>
           {isLoading? 'sending...': 'LOGIN'}
-        </button>
+        </button> */}
       </main>
   );
 }
