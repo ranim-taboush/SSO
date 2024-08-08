@@ -74,16 +74,24 @@ export default function Home() {
     console.log('done data...')
   }
 
+  const getDataFromMyAccount = async() => {
+    console.log('getting data from myaccount')
+    await axios.get('https://myaccount.arabhardware.com/api/refresh')
+    .then(res=>console.log('res', res))
+    .catch(e=>console.log('e', e))
+  }
+
   useEffect(()=>{
     gettingData()
     console.log('sessionStorage1: ', sessionStorage.getItem('token'))
     setToken(sessionStorage.getItem('token'))
+    getDataFromMyAccount()
   }, [])
 
   useEffect(()=>{
     // trying to fetch user and token from user_profile
     window.addEventListener('message', (event) => {
-      console.log('event.origin', event.origin)
+      // console.log('event.origin', event.origin)
       if (event.origin === 'https://user-profile-lyart.vercel.app') {
         console.log(event.data)
         // setCookie('user', event.data.user)
