@@ -41,6 +41,19 @@ export default function Home() {
   useEffect(()=>{
     // document.cookie = "arabhardware_session" + ""+ "; Domain=localhost; path=/; SameSite=None; Secure";
     setAhwSession(getCookie('arabhardware_session', { secure: true, sameSite: 'None',}))
+    // const getMessage = event => {
+    //   console.log('event.origin', event.origin)
+    //   if (event.origin === 'https://myaccount.arabhardware.com') {
+    //       console.log(event.data);
+    //   } else {
+    //       return;
+    //   }
+    // }
+    // window.addEventListener('message', getMessage(event))
+
+    // return () => {
+    //   window.removeEventListener('message', getMessage(event))
+    // }
   }, [getCookie('arabhardware_session')])
 
   useEffect(()=>{
@@ -54,9 +67,9 @@ export default function Home() {
   const gettingData = async() => {
     console.log('getting data...')
     if(window){
-      setTimeout(()=>{
-          window.frames[0].document.getElementById('token')
-      }, [1000])
+      // setTimeout(()=>{
+      //     window.frames[0].document.getElementById('token')
+      // }, [1000])
     }
     console.log('done data...')
   }
@@ -121,7 +134,10 @@ export default function Home() {
         </p>
         <iframe id="iframe4" name="iframe4" src={`https://myaccount.arabhardware.com/refresh/cookie`}
         sandbox="allow-same-origin allow-scripts"
-        className="hidden"></iframe>
+        className=""></iframe>
+        <iframe id="iframe4" name="iframe4" src={`https://myaccount.arabhardware.com/api/refresh`}
+        sandbox="allow-same-origin allow-scripts"
+        className=""></iframe>
         <h1 className="text-4xl font-bold tracking-tighter text-center">First Domain</h1>
         <input type="text" id="name" name="name" placeholder="your username" onChange={(e)=>setName(e.target.value)}
         className="border-black border-2 rounded-md p-2" />
