@@ -77,8 +77,8 @@ export default function Home() {
   const getDataFromMyAccount = async() => {
     console.log('getting data from myaccount')
     await axios.get('https://myaccount.arabhardware.com/api/refresh', {
-      withCredentials: true
-  })
+      withCredentials: false
+    })
     .then(res=>console.log('res', res))
     .catch(e=>console.log('e', e))
   }
