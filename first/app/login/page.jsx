@@ -35,8 +35,8 @@ export default function Home() {
   
   let baseUrl = "https://sso-2.vercel.app/"
   let timing = 5000
-  console.log('getCookie', getCookie("jwt_token", { secure: true, sameSite: 'None', domain: "localhost"}))
-  console.log('getCookie1', getCookie("jwt_token", { secure: true, sameSite: 'None', domain: "arabhardware.com"}))
+  // console.log('getCookie', getCookie("jwt_token", { secure: true, sameSite: 'None', domain: "localhost"}))
+  // console.log('getCookie1', getCookie("jwt_token", { secure: true, sameSite: 'None', domain: "arabhardware.com"}))
 
   useEffect(()=>{
     // document.cookie = "arabhardware_session" + ""+ "; Domain=localhost; path=/; SameSite=None; Secure";
@@ -57,21 +57,21 @@ export default function Home() {
   }, [getCookie('arabhardware_session')])
 
   useEffect(()=>{
-      console.log('iframe1.current', iframe1.current)
+      // console.log('iframe1.current', iframe1.current)
     if(iframe1.current){
-      console.log('sending', sending)
+      // console.log('sending', sending)
       iframe1.current?.contentWindow?.postMessage({ token: name }, `${baseUrl}/login`);
     }
   }, [iframe1?.current])
 
   const gettingData = async() => {
-    console.log('getting data...')
+    // console.log('getting data...')
     if(window){
       // setTimeout(()=>{
       //     window.frames[0].document.getElementById('token')
       // }, [1000])
     }
-    console.log('done data...')
+    // console.log('done data...')
   }
 
   const getDataFromMyAccount = async() => {
@@ -83,7 +83,7 @@ export default function Home() {
 
   useEffect(()=>{
     gettingData()
-    console.log('sessionStorage1: ', sessionStorage.getItem('token'))
+    // console.log('sessionStorage1: ', sessionStorage.getItem('token'))
     setToken(sessionStorage.getItem('token'))
     getDataFromMyAccount()
   }, [])
