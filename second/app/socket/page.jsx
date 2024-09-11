@@ -5,20 +5,33 @@ export default function Home() {
   const [status, setStatus] = useState('not registered');
 
   useEffect(() => {
-    const ws = new WebSocket('ws://localhost:8080');
-
-    ws.onmessage = (event) => {
-      const data = JSON.parse(event.data);
-      setStatus(data.status);
+    const socket = new WebSocket('ws://localhost:3002/api/socket');
+  
+    socket.onopen = () => {
+      console.log('Connected to WebSocket server');
     };
-
+  
+    socket.onmessage = (event) => {
+      const message = JSON.parse(event.data);
+      console.log('Message from server:', message);
+      setStatus(message.status); // Update status state
+    };
+  
+    socket.onerror = (error) => {
+      console.error('WebSocket error:', error);
+    };
+  
+    socket.onclose = (event) => {
+      console.log('WebSocket connection closed:', event);
+    };
+  
     return () => {
-      ws.close();
+      socket.close();
     };
   }, []);
 
   const updateStatus = (newStatus) => {
-    const ws = new WebSocket('ws://localhost:8080');
+    const ws = new WebSocket('ws://localhost:3002/api/socket');
     ws.onopen = () => {
       ws.send(JSON.stringify({ type: 'updateStatus', status: newStatus }));
     };

@@ -11,6 +11,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <script src="https://js.pusher.com/8.2.0/pusher.min.js"></script>
+        <script src="https://js.pusher.com/beams/1.0/push-notifications-cdn.js"></script>
+        {/* npm install @pusher/push-notifications-web */}
+      </head>
       <body className={inter.className}>{children}</body>
     </html>
   );
