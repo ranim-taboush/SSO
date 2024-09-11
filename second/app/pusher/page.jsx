@@ -6,6 +6,9 @@ const Notifications = () => {
   const [notifications, setNotifications] = useState([]);
 
   useEffect(() => {
+    console.log('process.env.NEXT_PUBLIC_PUSHER_APP_KEY', process.env.NEXT_PUBLIC_PUSHER_APP_KEY)
+    console.log('process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER', process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER)
+    
     const pusher = new Pusher(process.env.NEXT_PUBLIC_PUSHER_APP_KEY, {
       cluster: process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER,
     });

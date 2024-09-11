@@ -6,6 +6,8 @@ function Page() {
     const [userId, setUserId] = useState('')
 
     useEffect(()=>{
+        console.log('process.env.NEXT_PUBLIC_PUSHER_APP_KEY', process.env.NEXT_PUBLIC_PUSHER_APP_KEY)
+        console.log('process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER', process.env.NEXT_PUBLIC_PUSHER_APP_CLUSTER)
           // Enable pusher logging - don't include this in production
           Pusher.logToConsole = true;
 
